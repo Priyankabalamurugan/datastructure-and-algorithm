@@ -1,0 +1,188 @@
+REVERSED ARRAY
+
+package concepts;
+
+import java.util.Scanner;
+
+public class ReversedArray {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) arr[i] = sc.nextInt();
+        for (int i = 0; i < n / 2; i++) {  
+            int temp = arr[i];
+            arr[i] = arr[n - 1 - i];
+            arr[n - 1 - i] = temp;
+        }
+        System.out.print("Reversed array is "+":");
+        for (int num : arr) System.out.print(num + " ");
+    }
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+ROTATE ARRAY
+package concepts;
+
+import java.util.Scanner;
+
+public class RotateArray {
+    public static void main(String[] args) {
+       
+        Scanner scanner = new Scanner(System.in);
+
+        
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+
+      
+        int[] arr = new int[n];
+
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+      
+        System.out.println("Original Array:");
+        printArray(arr);
+
+        
+        rotateLeft(arr);
+
+       
+        System.out.println("Array after Left Rotation:");
+        printArray(arr);
+
+       
+        scanner.close();
+    }
+
+    
+    public static void rotateLeft(int[] arr) {
+        int firstElement = arr[0];
+
+      
+        for (int i = 1; i < arr.length; i++) {
+            arr[i - 1] = arr[i];
+        }
+
+      
+        arr[arr.length - 1] = firstElement;
+    }
+
+   
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); 
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------
+ARRAY INSERTION AND DELETION 
+package concepts;
+
+import java.util.Scanner;
+
+public class ArrayOperations {
+    public static void main(String[] args) {
+      
+        Scanner scanner = new Scanner(System.in);
+
+     
+        System.out.print("Enter the number of elements in the array: ");
+        int n = scanner.nextInt();
+
+     
+        int[] arr = new int[n];
+
+       
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
+        }
+
+    
+        System.out.println("Original Array:");
+        printArray(arr);
+
+   
+        System.out.print("Enter the index at which you want to insert a new element: ");
+        int insertIndex = scanner.nextInt();
+        System.out.print("Enter the element you want to insert: ");
+        int insertValue = scanner.nextInt();
+
+    
+        arr = insertElement(arr, insertIndex, insertValue);
+
+    
+        System.out.println("Array after Insertion:");
+        printArray(arr);
+
+       
+        System.out.print("Enter the index from which you want to delete an element: ");
+        int deleteIndex = scanner.nextInt();
+
+        arr = deleteElement(arr, deleteIndex);
+
+        
+        System.out.println("Array after Deletion:");
+        printArray(arr);
+
+       
+        scanner.close();
+    }
+
+    
+    public static int[] insertElement(int[] arr, int index, int value) {
+       
+        if (index < 0 || index > arr.length) {
+            System.out.println("Invalid index!");
+            return arr;
+        }
+
+       
+        int[] newArr = new int[arr.length + 1];
+
+        for (int i = 0; i < index; i++) {
+            newArr[i] = arr[i];
+        }
+
+        newArr[index] = value;
+
+        for (int i = index; i < arr.length; i++) {
+            newArr[i + 1] = arr[i];
+        }
+
+        return newArr;
+    }
+
+    public static int[] deleteElement(int[] arr, int index) {
+        if (index < 0 || index >= arr.length) {
+            System.out.println("Invalid index!");
+            return arr;
+        }
+
+     
+        int[] newArr = new int[arr.length - 1];
+
+        for (int i = 0, j = 0; i < arr.length; i++) {
+            if (i != index) {
+                newArr[j++] = arr[i];
+            }
+        }
+
+        return newArr;
+    }
+
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println(); 
+    }
+}
+
