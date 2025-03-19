@@ -1,0 +1,94 @@
+SINGLY LINKED LIST
+
+package concepts;
+
+
+	public class SinglyLinkedList {
+	    
+	
+	    static class Node {
+	        int data;
+	        Node next;
+	        
+	        
+	        Node(int data) {
+	            this.data = data;
+	            this.next = null;
+	        }
+	    }
+	    
+	    Node head; 
+	    
+	   
+	    public void insertAtBeginning(int newData) {
+	        Node newNode = new Node(newData);
+	        newNode.next = head;
+	        head = newNode;
+	    }
+	    
+	   
+	    public void insertAtPosition(int position, int newData) {
+	        if (position < 1) {
+	            System.out.println("Position must be 1 or greater.");
+	            return;
+	        }
+	        
+	        Node newNode = new Node(newData);
+	        
+	        
+	        if (position == 1) {
+	            newNode.next = head;
+	            head = newNode;
+	            return;
+	        }
+	        
+	        Node current = head;
+	        int count = 1;
+	        
+	       
+	        while (current != null && count < position - 1) {
+	            current = current.next;
+	            count++;
+	        }
+	        
+	        if (current == null) {
+	            System.out.println("Position exceeds list length.");
+	            return;
+	        }
+	        
+	        newNode.next = current.next;
+	        current.next = newNode;
+	    }
+	    
+	    public void displayList() {
+	        Node current = head;
+	        
+	        while (current != null) {
+	            System.out.print(current.data + " ");
+	            current = current.next;
+	        }
+	        System.out.println();
+	    }
+	    
+	    public static void main(String[] args) {
+	        SinglyLinkedList list = new SinglyLinkedList();
+	        
+	        list.insertAtBeginning(60);
+	        list.insertAtBeginning(50);
+	        list.insertAtBeginning(40);
+	        list.insertAtBeginning(30);
+	        list.insertAtBeginning(20);
+	        list.insertAtBeginning(10);
+	        
+	        System.out.println("Original List:");
+	        list.displayList();
+	        
+	        list.insertAtBeginning(744444444);
+	        System.out.println("List after inserting 777 at the beginning:");
+	        list.displayList();
+	        
+	        list.insertAtPosition(5, 9999);
+	        System.out.println("List after inserting 333 at position 4:");
+	        list.displayList();
+	    }
+	}
