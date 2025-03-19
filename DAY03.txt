@@ -1,0 +1,72 @@
+FIND THE MIDDLE ELEMENT IN THE LINKED LIST
+
+package concepts;
+import java.util.Scanner;
+
+class LinkedList {
+    Node head; 
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    
+    public void append(int newData) {
+        Node newNode = new Node(newData);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node last = head;
+        while (last.next != null) {
+            last = last.next;
+        }
+        last.next = newNode;
+    }
+
+  
+    public void findMiddle() {
+        if (head == null) {
+            System.out.println("List is empty!");
+            return;
+        }
+
+        Node slow = head;
+        Node fast = head;
+
+     
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        System.out.println("The middle element is: " + slow.data);
+    }
+}
+
+public class MiddleElement {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        LinkedList list = new LinkedList();
+
+        System.out.print("Enter the number of elements in the linked list: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter the elements of the linked list:");
+        for (int i = 0; i < n; i++) {
+            int element = scanner.nextInt();
+            list.append(element);
+        }
+
+    
+        list.findMiddle();
+    }
+}
