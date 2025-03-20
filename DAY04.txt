@@ -1,0 +1,147 @@
+package DoublyLinkedList;
+import java.util.Scanner;
+class DoublyLinkedList {
+  
+    class Node {
+        int data;
+        Node prev;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.prev = null;
+            this.next = null;
+        }
+    }
+
+    private Node head;  
+    private Node tail;  
+
+   
+    public DoublyLinkedList() {
+        head = null;
+        tail = null;
+    }
+
+
+    public void insertAtBegin(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = tail = newNode;
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
+        System.out.println("Inserted " + data + " at the beginning.");
+    }
+
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data);
+
+        if (tail == null) {
+            head = tail = newNode;
+        } else {
+            newNode.prev = tail;
+            tail.next = newNode;
+            tail = newNode;
+        }
+        System.out.println("Inserted " + data + " at the end.");
+    }
+
+   
+    public void deleteFromBegin() {
+        if (head == null) {
+            System.out.println("The list is empty. Nothing to delete.");
+            return;
+        }
+
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            head = head.next;
+            head.prev = null;
+        }
+        System.out.println("Deleted a node from the beginning.");
+    }
+
+    
+    public void deleteFromEnd() {
+        if (tail == null) {
+            System.out.println("The list is empty. Nothing to delete.");
+            return;
+        }
+
+        if (head == tail) {
+            head = tail = null;
+        } else {
+            tail = tail.prev;
+            tail.next = null;
+        }
+        System.out.println("Deleted a node from the end.");
+    }
+
+    
+    public void displayList() {
+        if (head == null) {
+            System.out.println("The list is empty.");
+            return;
+        }
+
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " <-> ");
+            temp = temp.next;
+        }
+        System.out.println("null");
+    }
+
+   
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        while (true) {
+            System.out.println("\nChoose an operation:");
+            System.out.println("1. Insert at the beginning");
+            System.out.println("2. Insert at the end");
+            System.out.println("3. Delete from the beginning");
+            System.out.println("4. Delete from the end");
+            System.out.println("5. Display the list");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the value to insert at the beginning: ");
+                    int beginData = scanner.nextInt();
+                    list.insertAtBegin(beginData);
+                    break;
+                case 2:
+                    System.out.print("Enter the value to insert at the end: ");
+                    int endData = scanner.nextInt();
+                    list.insertAtEnd(endData);
+                    break;
+                case 3:
+                    list.deleteFromBegin();
+                    break;
+                case 4:
+                    list.deleteFromEnd();
+                    break;
+                case 5:
+                    System.out.println("Current List:");
+                    list.displayList();
+                    break;
+                case 6:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
